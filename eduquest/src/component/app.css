@@ -1,0 +1,13 @@
+/* App.css */
+
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, red, red); /* Customize colors here */
+}
+
+.app-container {
+    min-height: 100vh;
+    padding: 20px; /* Adjust padding to control content distance from edges */
+    box-sizing: border-box;
+}

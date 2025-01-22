@@ -1,0 +1,66 @@
+.search-container {
+  position: relative;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%; /* Positions below the search bar */
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  z-index: 1000; /* Ensures it appears above other elements */
+  max-height: 200px;
+  overflow-y: inherit;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-left: 10px;
+}
+
+.search-results button {
+  text-decoration: none; /* Ensure no underline for buttons */
+  font-size: 1rem;
+  color: #007bff;
+  background-color: transparent;
+  border: none;
+  font-weight: normal;
+  padding: 7px 7px;
+  margin: auto;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.search-results button:hover {
+  color: #004ea2; /* Optional: Change color on hover */
+  transform: scale(1.02); /* Slightly scale up the button */
+  /* You can also use translate effect instead of scale if you prefer movement */
+  transform-origin: center; /* Ensures the button scales evenly from the center */
+}
+
+.custom-button {
+  position: relative;
+}
+
+.custom-button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff; /* Underline color */
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.custom-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+@media (max-width: 768px) {
+  .custom-button {
+    font-size: 0.9rem; /* Smaller font size for mobile devices */
+    padding: 4px 8px; /* Adjust padding for smaller screens */
+  }
+}

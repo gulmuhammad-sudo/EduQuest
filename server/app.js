@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 var universityRouter = require('./routes/universities');
 var chatRouter = require('./routes/chats');
 var passportConfig = require('./passportConfig');
+const PORT = process.env.PORT || 4000;
 
 const { populateUniversity }  = require('./faker/university');
 const { populateUser } = require('./faker');

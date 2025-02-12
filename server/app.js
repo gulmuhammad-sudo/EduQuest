@@ -30,10 +30,12 @@ passportConfig(passport);
 //populateUniversity();
 populateUser();
 
-app.use(cors({
-  origin: '*', 
-  credentials: true, 
-}));
+//app.use(cors({
+//  origin: '*', 
+//  credentials: true, 
+//}));
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

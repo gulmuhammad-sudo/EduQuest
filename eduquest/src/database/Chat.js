@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const client = axios.create({baseURL: "http://eduquest-4drc.onrender.com:8080/chat", withCredentials: true})
+const client = axios.create({baseURL: "http://localhost:4000/chat", withCredentials: true})
 
 export const getChats = () => {
     return client.get('/');

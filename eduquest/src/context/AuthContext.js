@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const client = axios.create({baseURL: "http://localhost:4000", withCredentials: true})
+    const client = axios.create({baseURL: "http://eduquest-4drc.onrender.com:8080", withCredentials: true})
 
     useEffect(() => {
         setLoading(true)

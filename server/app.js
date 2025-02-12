@@ -13,14 +13,13 @@ var usersRouter = require('./routes/users');
 var universityRouter = require('./routes/universities');
 var chatRouter = require('./routes/chats');
 var passportConfig = require('./passportConfig');
-const PORT = process.env.PORT || 4000;
 
 const { populateUniversity }  = require('./faker/university');
 const { populateUser } = require('./faker');
 
 var app = express();
 
-mongoose.connect('mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest').then(() => {
+mongoose.connect('mongodb://localhost/eduquest').then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {
   console.error('MongoDB connection error:', err);
@@ -32,7 +31,7 @@ passportConfig(passport);
 populateUser();
 
 app.use(cors({
-  origin: '*', 
+  origin: 'http://localhost:3000', 
   credentials: true, 
 }));
 
@@ -53,7 +52,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest/eduquest',
+    mongoUrl: 'mongodb://localhost/eduquest',
     collectionName: 'sessions'
   }),
   cookie: { maxAge: 180 * 60 * 1000 } 

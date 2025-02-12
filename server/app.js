@@ -32,7 +32,7 @@ passportConfig(passport);
 populateUser();
 
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: '*', 
   credentials: true, 
 }));
 
@@ -53,7 +53,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: 'mongodb://localhost/eduquest',
+    mongoUrl: 'mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest/eduquest',
     collectionName: 'sessions'
   }),
   cookie: { maxAge: 180 * 60 * 1000 } 

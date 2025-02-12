@@ -20,7 +20,7 @@ const { populateUser } = require('./faker');
 
 var app = express();
 
-mongoose.connect('mongodb+srv://GulMuhammad-EduQuest:GulMuhammad-EduQuest@eduquest-cluster.954da.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest-cluster').then(() => {
+mongoose.connect('mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest').then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {
   console.error('MongoDB connection error:', err);

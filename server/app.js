@@ -39,10 +39,15 @@ populateUser();
 app.use(cors({
     origin: "https://eduquest-guide1.netlify.app",
     methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "*",
+    allowedHeaders: "Content-Type,Authorization,Accept,X-Requested-With",
     credentials: true
 }));
 
+// Ensure `Access-Control-Allow-Credentials` is always set
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

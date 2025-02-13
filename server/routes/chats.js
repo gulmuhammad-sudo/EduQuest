@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
 // Endpoint to send message with optional attachment
 router.post('/', upload.single('attachment'), async (req, res) => {
     console.log(req.body)
+    console.log(req.user)
     try {
         const user = req.user;
         const { message } = req.body;

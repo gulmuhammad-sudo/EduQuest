@@ -74,7 +74,7 @@ app.use(session({
         httpOnly: false, // Protect against XSS
         sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week 
-        domain: 'www.eduquest-guide1.netlify.app' // Crucial for subdomains
+        domain: 'eduquest-guide1.netlify.app' // Crucial for subdomains
     }
 }));
 

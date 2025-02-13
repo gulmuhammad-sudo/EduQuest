@@ -69,7 +69,13 @@ app.use(session({
     mongoUrl: 'mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest/eduquest',
     collectionName: 'sessions'
   }),
-  cookie: { maxAge: 180 * 60 * 1000 } 
+    cookie: {
+        secure: true,
+        httpOnly: false, // Protect against XSS
+        sameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week 
+        domain: '.eduquest-guide1.netlify.app' // Crucial for subdomains
+    }
 }));
 
 app.use(passport.initialize());

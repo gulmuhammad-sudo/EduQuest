@@ -38,8 +38,8 @@ populateUser();
 // Allow requests from your Netlify frontend
 app.use(cors({
     origin: "https://eduquest-guide1.netlify.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "*",
     credentials: true
 }));
 

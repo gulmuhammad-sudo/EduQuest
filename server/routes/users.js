@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 router.get('/user', async (req, res) => {
   const user = req.user;
@@ -45,12 +46,13 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err) throw err;
     if (!user) return res.status(400).json({ msg: info.message });
     req.logIn(user, err => {
       if (err) throw err;
-      res.status(200).json({ msg: 'Logged in successfully', user });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '12h' });
+      res.status(200).json({ msg: 'Logged in successfully', user, token });
     });
   })(req, res, next);
 });

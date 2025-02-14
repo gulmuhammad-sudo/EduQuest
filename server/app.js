@@ -19,6 +19,8 @@ const { populateUser } = require('./faker');
 
 var app = express();
 
+
+
 mongoose.connect('mongodb+srv://gul-muhammad:n9E7xTwwmpvJB1qg@eduquest.qandv.mongodb.net/?retryWrites=true&w=majority&appName=EduQuest/eduquest').then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {
@@ -37,7 +39,7 @@ populateUser();
 
 // Allow requests from your Netlify frontend
 app.use(cors({
-    origin: "https://eduquest-guide1.netlify.app",
+    origin: "http://localhost:3000",
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     allowedHeaders: "Content-Type,Authorization,Accept,X-Requested-With",
     credentials: true
@@ -62,7 +64,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Session setup with MongoDB store
 app.use(session({
-  secret: 'your_secret_key',
+  secret: 'secret',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
@@ -80,6 +82,39 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+//      JWT MIDDLEWARE
+
+
+const jwtAuthMiddleware = (req, res, next) => {
+  if (req.user) {
+      return next();
+  }
+  passport.authenticate('jwt', {session: false}, (err, user, info) => {
+      if (err) {
+          // Handle error if needed (e.g., log it)
+          console.error('Authentication Error:', err);
+          return next(err); // Pass the error to the next middleware
+      }
+
+      if (!user) {
+          // Handle the case where the user is not found
+          // For example, you might want to populate req.user with null
+          req.user = null;
+          return next(); // Continue to the next middleware or route handler
+      }
+
+      // Authentication succeeded; populate req.user
+      req.user = user;
+      next(); // Continue to the next middleware or route handler
+  })(req, res, next);
+};
+
+// Use the custom JWT middleware globally
+app.use(jwtAuthMiddleware);
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

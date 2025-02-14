@@ -1,5 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const bcrypt = require('bcryptjs');
 
 module.exports = function(passport) {
@@ -21,6 +22,29 @@ module.exports = function(passport) {
       });
     }).catch(err => console.error(err));
   }));
+
+
+  // JWT strategy for token-based authentication (mobile)
+  const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET || 'secret',
+  };
+
+  passport.use(
+    new JwtStrategy(opts, (jwt_payload, done) => {
+      console.log('JWT payload:', jwt_payload);
+      User.findById(jwt_payload.id)
+        .then(user => {
+          if (user) {
+            return done(null, user); // User authenticated with JWT
+          } else {
+            return done(null, false);
+          }
+        })
+        .catch(err => done(err, false));
+    })
+  );
+
 
   passport.serializeUser((user, done) => {
     done(null, user.id);

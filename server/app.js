@@ -39,7 +39,7 @@ populateUser();
 
 // Allow requests from your Netlify frontend
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://eduquest-guide1.netlify.app",
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     allowedHeaders: "Content-Type,Authorization,Accept,X-Requested-With",
     credentials: true
